@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Button from "antd/lib/button";
 import './index.scss';
+import 'antd/dist/antd.css';
 
-const App = () => <h1>Hello!</h1>;
+const App = () => <Button type="primary">Primary Button</Button>;
 
 ReactDOM.render(
-  <>
-    <App />
-  </>,
+  <App />,
   document.getElementById('app')
 );
