@@ -9,6 +9,7 @@ class PostsStore {
   displayError: boolean = false;
   displaySuccess: boolean = false;
   showModal: boolean = false;
+  postForUpdate: IFullPost | undefined;
 
   getPosts(): void {
     this.setError(false);
@@ -34,15 +35,20 @@ class PostsStore {
   }
 
   deletePost(id: number): Promise<void> {
+    this.setDisplayError(false);
     return Client.deletePost(id)
       .then(() => {
         this.posts = this.posts!.filter((item) => item.id !== id);
+      })
+      .catch(() => {
+        this.setDisplayError(true);
       });
   }
 
-  createPost(post: IPost): void {
+  createPost(post: IPost): Promise<void> {
     this.setError(false);
-    Client.createPost(post)
+    this.displaySuccess = false;
+    return Client.createPost(post)
       .then((post) => {
         this.posts = [...this.posts, post];
         this.setShowModal(false);
@@ -51,6 +57,30 @@ class PostsStore {
       .catch(() => {
         this.setDisplayError(true);
       });
+  }
+
+  updatePost(post: IFullPost): Promise<void> {
+    this.setError(false);
+    this.displaySuccess = false;
+    return Client.updatePost(post)
+      .then((newPost) => {
+        this.posts = this.posts.map((post) =>
+          newPost.id === post.id ? newPost : post
+        );
+        this.setShowModal(false);
+        this.displaySuccess = true;
+      })
+      .catch(() => {
+        this.setDisplayError(true);
+      });
+  }
+
+  clearPostForUpdate() {
+    this.postForUpdate = undefined;
+  }
+
+  setPostForUpdate(id: number) {
+    [this.postForUpdate] = this.posts.filter((post) => post.id === id);
   }
 
   private setError(status: boolean): void {
@@ -74,6 +104,7 @@ decorate(PostsStore, {
   displayError: observable,
   displaySuccess: observable,
   showModal: observable,
+  postForUpdate: observable,
   getPosts: action,
   getPost: action,
   setDisplayError: action,

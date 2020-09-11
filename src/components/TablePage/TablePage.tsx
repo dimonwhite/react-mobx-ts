@@ -13,6 +13,7 @@ const TablePage: FC = () => {
 
   const createHandler = () => {
     PostsStore.setShowModal(true);
+    PostsStore.clearPostForUpdate();
   };
 
   return (

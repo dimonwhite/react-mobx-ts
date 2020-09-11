@@ -8,7 +8,7 @@ import ModalForm from '../ModalForm/ModalForm';
 import { openNotificationError, openNotificationSuccess } from '../notifications/notifications';
 
 const App: FC = () => {
-  const { displayError, displaySuccess, showModal } = PostsStore;
+  const { displayError, displaySuccess, showModal, postForUpdate } = PostsStore;
 
   useEffect(() => {
     if (displayError) {
@@ -30,7 +30,7 @@ const App: FC = () => {
           <Route component={PostPage} path="/post/:id" />
         </Switch>
       </div>
-      <ModalForm showModal={showModal} />
+      <ModalForm showModal={showModal} post={postForUpdate} />
     </BrowserRouter>
   );
 };

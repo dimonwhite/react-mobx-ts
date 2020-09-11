@@ -10,15 +10,15 @@ const ControlPost: FC<{ id: number }> = ({ id }) => {
 
   const deleteHandler = () => {
     setLoading(true);
-    PostsStore.setDisplayError(false);
     PostsStore.deletePost(id)
       .then(() => {
         setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        PostsStore.setDisplayError(true);
       });
+  };
+
+  const changePost = () => {
+    PostsStore.setShowModal(true);
+    PostsStore.setPostForUpdate(id);
   };
 
   return (
@@ -27,7 +27,7 @@ const ControlPost: FC<{ id: number }> = ({ id }) => {
         <Button type={'primary'}>Open</Button>
       </NavLink>
       <Tooltip title="Edit">
-        <Button type="primary" shape="circle" icon={<EditOutlined />} />
+        <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={changePost} />
       </Tooltip>
       <Tooltip title="Delete">
         <Button type="primary" danger shape="circle" icon={loading ? <LoadingOutlined /> : <DeleteOutlined />} onClick={deleteHandler} />

@@ -12,6 +12,6 @@ export const openNotificationSuccess = (): void => {
   notification.success({
     message: 'Success',
     description:
-      'Created',
+      'Success',
   });
 };
