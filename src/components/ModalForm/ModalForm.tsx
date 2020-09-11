@@ -2,8 +2,9 @@ import React, { FC, useEffect, useState } from 'react';
 import { Modal, Form, Input, Button } from 'antd';
 import PostsStore from '../../store/PostsStore';
 import { LoadingOutlined } from '@ant-design/icons';
-import { IFullPost } from '../../interfaces/interfaces';
+import { IFullPost, IPost } from '../../interfaces/interfaces';
 import './modalForm.scss';
+const { TextArea } = Input;
 
 type TModalForm = {
   showModal: boolean,
@@ -18,7 +19,7 @@ const tailLayout = {
 };
 
 const ModalForm: FC<TModalForm> = ({ showModal, post }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [form] = Form.useForm();
 
   const closeModal = (): void => {
@@ -26,7 +27,7 @@ const ModalForm: FC<TModalForm> = ({ showModal, post }) => {
     form.resetFields();
   };
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: IPost): void => {
     setLoading(true);
     if (post) {
       PostsStore.updatePost({ id: post.id, ...values })
@@ -76,7 +77,7 @@ const ModalForm: FC<TModalForm> = ({ showModal, post }) => {
           name="body"
           rules={[{ required: true, message: 'Please input body!' }]}
         >
-          <Input />
+          <TextArea />
         </Form.Item>
 
         <Form.Item {...tailLayout}>

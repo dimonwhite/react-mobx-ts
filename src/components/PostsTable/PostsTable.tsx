@@ -23,7 +23,7 @@ const columns: ColumnsType<IFullPost> = [
 
 const PostsTable: FC<IPostsTable> = ({ posts, error }) => {
 
-  const customizeRenderEmpty = () => {
+  const customizeRenderEmpty = (): JSX.Element => {
     if (error) {
       return (
         <Tooltip title="Error">

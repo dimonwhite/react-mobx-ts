@@ -75,11 +75,11 @@ class PostsStore {
       });
   }
 
-  clearPostForUpdate() {
+  clearPostForUpdate(): void {
     this.postForUpdate = undefined;
   }
 
-  setPostForUpdate(id: number) {
+  setPostForUpdate(id: number): void {
     [this.postForUpdate] = this.posts.filter((post) => post.id === id);
   }
 

@@ -11,7 +11,7 @@ const TablePage: FC = () => {
     PostsStore.getPosts();
   }, []);
 
-  const createHandler = () => {
+  const createHandler = (): void => {
     PostsStore.setShowModal(true);
     PostsStore.clearPostForUpdate();
   };

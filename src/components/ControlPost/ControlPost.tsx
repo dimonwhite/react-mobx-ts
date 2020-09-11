@@ -6,9 +6,9 @@ import PostsStore from '../../store/PostsStore';
 import './controlPost.scss';
 
 const ControlPost: FC<{ id: number }> = ({ id }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const deleteHandler = () => {
+  const deleteHandler = (): void => {
     setLoading(true);
     PostsStore.deletePost(id)
       .then(() => {
@@ -16,7 +16,7 @@ const ControlPost: FC<{ id: number }> = ({ id }) => {
       });
   };
 
-  const changePost = () => {
+  const changePost = (): void => {
     PostsStore.setShowModal(true);
     PostsStore.setPostForUpdate(id);
   };
