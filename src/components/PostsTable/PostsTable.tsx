@@ -37,7 +37,7 @@ const PostsTable: FC<IPostsTable> = ({ posts, error }) => {
 
   return (
     <ConfigProvider renderEmpty={customizeRenderEmpty}>
-      <Table dataSource={posts} columns={columns} rowKey={'id'} pagination={false} bordered />
+      <Table dataSource={posts} columns={columns} rowKey={'id'} bordered />
     </ConfigProvider>
   )
 
